@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-8">
+
+    <div class="max-w-lg mx-auto">
+        <form id="studentForm" class="border border-gray-300 p-6 rounded-lg bg-white">
+            <h2 class="text-2xl font-semibold text-center mb-6">Student Form</h2>
+
+            <table class="w-full border border-gray-300">
+                <tr>
+                    <td class="p-2"><label for="name" class="block">Name</label></td>
+                    <td class="p-2"><input type="text" id="name" class="border border-gray-300 p-1 w-full rounded-md"
+                            required></td>
+                </tr>
+
+                <tr>
+                    <td class="p-2"><label for="age" class="block">Age</label></td>
+                    <td class="p-2"><input type="number" id="age" class="border border-gray-300 p-1 w-full rounded-md"
+                            required></td>
+                </tr>
+
+                <tr>
+                    <td class="p-2"><span class="block">Gender</span></td>
+                    <td class="p-2">
+                        <label class="mr-4"><input type="radio" name="gender" value="male" class="mr-1" required>
+                            Male</label>
+                        <label><input type="radio" name="gender" value="female" class="mr-1"> Female</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="p-2"><label for="course" class="block">Course</label></td>
+                    <td class="p-2">
+                        <select id="course" class="border border-gray-300 p-1 w-full rounded-md" required>
+                            <option disabled selected>Select your course</option>
+                            <option>MERN Stack</option>
+                            <option>Flutter</option>
+                            <option>Data Analytics</option>
+                            <option>Data Science</option>
+                            <option>Python Programming</option>
+                            <option>Java Programming</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="p-2"><label for="email" class="block">Email</label></td>
+                    <td class="p-2"><input type="email" id="email" class="border border-gray-300 p-1 w-full rounded-md"
+                            required></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="pt-4">
+                        <input type="submit" value="Save"
+                            class="w-full bg-gray-300 text-black py-2 rounded-md cursor-pointer">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <table id="studentTable" class="mt-8 border border-gray-300 w-full rounded-lg bg-white">
+            <tr class="bg-gray-200">
+                <th class="p-2 border border-gray-300">Name</th>
+                <th class="p-2 border border-gray-300">Age</th>
+                <th class="p-2 border border-gray-300">Gender</th>
+                <th class="p-2 border border-gray-300">Course</th>
+                <th class="p-2 border border-gray-300">Email</th>
+                <th class="p-2 border border-gray-300">Action</th>
+            </tr>
+        </table>
+
+        <script>
+            document.getElementById('studentForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const age = document.getElementById('age').value;
+                const gender = document.querySelector('input[name="gender"]:checked').value;
+                const course = document.getElementById('course').value;
+                const email = document.getElementById('email').value;
+
+                const table = document.getElementById('studentTable');
+
+                const newRow = table.insertRow();
+
+                newRow.insertCell(0).textContent = name;
+                newRow.insertCell(1).textContent = age;
+                newRow.insertCell(2).textContent = gender;
+                newRow.insertCell(3).textContent = course;
+                newRow.insertCell(4).textContent = email;
+
+                const actionCell = newRow.insertCell(5);
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('bg-red-600', 'text-white', 'rounded', 'p-1');
+                deleteButton.onclick = function () {
+                    table.deleteRow(newRow.rowIndex);
+                };
+                actionCell.appendChild(deleteButton);
+
+                document.getElementById('studentForm').reset();
+            });
+        </script>
+    </div>
+
+</body>
+
+</html>
