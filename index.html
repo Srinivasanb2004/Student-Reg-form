@@ -91,11 +91,17 @@
 
                 const newRow = table.insertRow();
 
+                
+
                 newRow.insertCell(0).textContent = name;
                 newRow.insertCell(1).textContent = age;
                 newRow.insertCell(2).textContent = gender;
                 newRow.insertCell(3).textContent = course;
                 newRow.insertCell(4).textContent = email;
+
+                for (let i = 0; i < newRow.cells.length; i++) {
+                    newRow.cells[i].classList.add('border', 'border-gray-300', 'p-2');
+                }
 
                 const actionCell = newRow.insertCell(5);
                 const deleteButton = document.createElement('button');
@@ -105,6 +111,7 @@
                     table.deleteRow(newRow.rowIndex);
                 };
                 actionCell.appendChild(deleteButton);
+                actionCell.classList.add('border', 'border-gray-300', 'p-2'); 
 
                 document.getElementById('studentForm').reset();
             });
